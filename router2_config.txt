@@ -1,0 +1,93 @@
+R2#sh running-config 
+Building configuration...
+
+Current configuration : 993 bytes
+!
+! Last configuration change at 18:05:43 UTC Sun Feb 8 2026 by admin
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+no ip icmp rate-limit unreachable
+ip cef
+!
+!
+!
+!
+!         
+!
+no ip domain lookup
+ip domain name lab.local
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$y4fv$TuTqCjMFLuuOj94GpERby1
+!
+!
+ip tcp synwait-time 5
+! 
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+interface Loopback100
+ description Configured_via_Linux_Python
+ ip address 10.10.10.1 255.255.255.0
+!
+interface FastEthernet0/0
+ ip address dhcp
+ duplex full
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+!         
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ login local
+ transport input ssh
+!
+!
+end
+
